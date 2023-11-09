@@ -3,7 +3,8 @@ var express = require('express');
 var app = express();
 
 // ejs
-app.set('views', __dirname + '/views');
+const path = require('path')
+app.set('views', path.join(__dirname, '/views'));
 app.set("view engine", "ejs");
 
 // bootstrap
@@ -21,15 +22,20 @@ app.use(express.urlencoded({extended: true}));
 // router
 var indexRouter = require('./router/');
 var resultRouter = require('./router/result');
+var boardRouter = require('./router/board');
 
 app.use('/', indexRouter);
 app.use('/', resultRouter);
+app.use('/',boardRouter);
 
 //jquery
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // jquery JS
 
 var uploadRouter = require('./router/upload');
 app.use('/', uploadRouter);
+
+// img
+app.use(express.static('upload'))
 
 // app.get('/result', function (req, res) {
 //     var val1 = req.query.val1;
