@@ -49,6 +49,6 @@ app.use(express.static('upload'))
 //     res.render('result', {'val1': val1, 'val2': val2});
 // })
 
-app.listen(3000, function() {
+app.listen(80, function() {
     console.log("3000 포트로 노드 서버 오픈!");
 })
