@@ -12,35 +12,37 @@ router.get("/board/register", function (req, res) {
   res.render("board/register");
 });
 
+const crypto = require('crypto');
+
 router.post("/board/register", async function (req, res, next) {
   var mb_name = req.body.mb_name;
   var mb_email = req.body.mb_email;
   var mb_password = req.body.mb_password;
 
+  const salt = crypto.randomBytes(32).toString("hex");
   const hashPassword = crypto
     .createHash("sha512")
     .update(mb_password + salt)
     .digest("hex");
   
   var query = "SELECT mb_email FROM member WHERE mb_email=?";
-  connection.query(query, [mb_email], function (err, rows) {
+  db.query(query, [mb_email], function (err, rows) {
     if (err) throw err;
 
     if (rows.length === 0) {
       var sql = {
         mb_name: mb_name,
         mb_email: mb_email,
-        mb_password: hashPassword, 
-        salt: salt,
+        mb_password: hashPassword,
+        date: new Date()
       };
 
-      var query = "INSERT INTO member SET ?";
-      connection.query(query, sql, function (err, result) {
+      var query = "insert into member set ?";
+      db.query(query, sql, function (err, result) {
         if (err) console.log(err);
         else {
           console.log(result);
           res.send("success");
-          res.redirect("/board");
         }
       });
     } else {

@@ -44,9 +44,11 @@
   var mb_password = $('#mb_password').val();
   var mb_ck_password = $('#mb_ck_password').val();
 
-  if (mb_password.length < 8) alert("비밀번호는 8자리 이상 입력해주세요.")
-  else if (mb_password !== mb_ck_password) alert("비밀번호가 일치하지 않습니다.")
-  else {
+  if (mb_password.length < 8) {
+    alert("비밀번호는 8자리 이상 입력해주세요.");
+  } else if (mb_password !== mb_ck_password) {
+    alert("비밀번호가 일치하지 않습니다.");
+  } else {
    $.ajax({
     url: "/board/register",
     type: "post",
