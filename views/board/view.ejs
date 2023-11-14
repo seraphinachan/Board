@@ -1,0 +1,41 @@
+<%- include("../include/header") -%>
+
+ <div class="container">
+  <h3 class="mb-5">게시판글보기</h3>
+
+  <div class="container">
+   <div class="d-flex justify-content-md-between mb-3">
+    <p>작성일 : <%=result.date%>
+    </p>
+    <p>게시글번호 : <%=result.idx%>
+    </p>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+     <a class="btn btn-primary me-md-2" href="/board/modify/<%=result.idx%>" role="button">수정</a>
+     <a class="btn btn-primary" href="/board/delete/<%=result.idx%>" role="button">삭제</a>
+    </div>
+   </div>
+   <div class="mb-3 row">
+    <label for="staticEmail" class="col-sm-2 col-form-label">글쓴이 : </label>
+    <div class="col-sm-10">
+     <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="<%=result.writer%>">
+    </div>
+   </div>
+   <div class="mb-3 row">
+    <label for="staticEmail" class="col-sm-2 col-form-label">제목 : </label>
+    <div class="col-sm-10">
+     <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="<%=result.title%>">
+    </div>
+   </div>
+   <div class="mb-3 row">
+    <label for="staticEmail" class="col-sm-2 col-form-label">내용 : </label>
+    <div class="col-sm-10">
+     <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="<%=result.content%>">
+    </div>
+   </div>
+   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a href="/board" class="btn btn-primary">돌아가기</a>
+   </div>
+  </div>
+ </div>
+
+ <%- include("../include/footer") -%>
