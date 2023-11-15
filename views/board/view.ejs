@@ -10,12 +10,6 @@
     <p>게시글번호 : <%=result.idx%>
     </p>
     <div class="btn-group">
-     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
-      aria-expanded="false"></button>
-     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="/board/modify/<%=result.idx%>">수정</a></li>
-      <li><a class="dropdown-item" href="/board/delete/<%=result.idx%>">삭제</a></li>
-     </ul>
      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <a class="btn btn-primary me-md-2" href="/board/modify/<%=result.idx%>" role="button">수정</a>
       <a class="btn btn-primary" href="/board/delete/<%=result.idx%>" role="button">삭제</a>

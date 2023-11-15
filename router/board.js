@@ -12,7 +12,7 @@ router.get("/board/register", function (req, res) {
   res.render("board/register");
 });
 
-const crypto = require("crypto");
+const crypto = require('crypto');
 
 router.post("/board/register", async function (req, res, next) {
   var mb_name = req.body.mb_name;
@@ -24,8 +24,8 @@ router.post("/board/register", async function (req, res, next) {
     .createHash("sha512")
     .update(mb_password + salt)
     .digest("hex");
-
-  var query = "SELECT mb_email FROM member WHERE mb_email=?";
+  
+  var query = "SELECT mb_email FROM member WHERE mb_email=? ";
   db.query(query, [mb_email], function (err, rows) {
     if (err) throw err;
 
@@ -34,27 +34,24 @@ router.post("/board/register", async function (req, res, next) {
         mb_name: mb_name,
         mb_email: mb_email,
         mb_password: hashPassword,
-        salt: salt,
-        date: new Date(),
+        date: new Date()
       };
 
-      var query = "Insert into member set ?";
+      var query = "insert into member set ?";
       db.query(query, sql, function (err, result) {
-        if (err) {
-          console.log(err);
-          res.status(500).send("Internal Server Error");
-        } else {
+        if (err) console.log(err);
+        else {
           console.log(result);
-          // res.send("success");
-          res.redirect("/board/login");
+          res.send("success");
         }
       });
     } else {
-      console.log("이미 등록된 이메일입니다.");
+      console.log(result);
       res.send("duplicatedEmail");
     }
   });
 });
+
 
 router.get("/board/login", function (req, res) {
   res.render("board/login");
@@ -126,6 +123,7 @@ router.get("/board/:type/:idx", function (req, res) {
   if (type == "delete") {
     var title = "삭제";
   }
+  console.log("아이고")
   res.render("board/auth", {
     idx: idx,
     type: type,

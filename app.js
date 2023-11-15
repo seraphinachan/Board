@@ -22,10 +22,12 @@ app.use(express.urlencoded({ extended: true }));
 // router
 var indexRouter = require("./router/");
 var resultRouter = require("./router/result");
+var goalRouter = require("./router/goal");
 var boardRouter = require("./router/board");
 
 app.use("/", indexRouter);
 app.use("/", resultRouter);
+app.use("/", goalRouter);
 app.use("/", boardRouter);
 
 //jquery
