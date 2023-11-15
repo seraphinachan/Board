@@ -1,0 +1,74 @@
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/jquery.js"></script>
+<style>
+ .container {
+  min-height: 100vh;
+ }
+
+ .mb-3 {
+  width: 300px;
+ }
+</style>
+
+<div class="container d-flex align-items-center justify-content-center">
+ <div class="d-flex flex-column align-items-center">
+  <h4>회원가입</h4>
+  <form action="/board/register" method="post">
+   <div class="mb-3">
+    <label for="mb_name" class="form-label">이름</label>
+    <input type="text" class="form-control" id="mb_name" name="mb_name" placeholder="이름을 입력해주세요.">
+   </div>
+   <div class="mb-3">
+    <label for="mb_email" class="form-label">이메일</label>
+    <input type="text" class="form-control" id="mb_email" name="mb_email" placeholder="이메일을 입력해주세요.">
+   </div>
+   <div class="mb-3">
+    <label for="mb_password" class="form-label">비밀번호</label>
+    <input type="password" class="form-control" id="mb_password" name="mb_password" placeholder="비밀번호를 입력해주세요.">
+   </div>
+   <div class="mb-3">
+    <label for="mb_ck_password" class="form-label">비밀번호 확인</label>
+    <input type="password" class="form-control" id="mb_ck_password" name="mb_ck_password"
+     placeholder="비밀번호를 다시 입력해주세요.">
+   </div>
+   <button type="submit" class="btn btn-primary" onclick="return checkPassword()">회원가입</button>
+  </form>
+ </div>
+</div>
+
+<script src="/js/bootstrap.min.js"></script>
+<script>
+ function checkPassword() {
+  var mb_name = $('#mb_name').val();
+  var mb_email = $('#mb_email').val();
+  var mb_password = $('#mb_password').val();
+  var mb_ck_password = $('#mb_ck_password').val();
+
+  if (mb_password.length < 8) {
+   alert("비밀번호는 8자리 이상 입력해주세요.");
+   return false;
+  } else if (mb_password !== mb_ck_password) {
+   alert("비밀번호가 일치하지 않습니다.");
+   return false;
+  } else {
+   $.ajax({
+    url: "/board/register",
+    type: "post",
+    contentType: "application/json",
+    data: {
+     mb_name: mb_name,
+     mb_email: mb_email,
+     mb_password: mb_password
+    },
+    success: function (data) {
+     if (data === "duplicatedEmail") {
+      alert("이미 등록된 이메일입니다.");
+     }
+     else if (data === "success") {
+      alert("정상적으로 회원가입 되었습니다.")
+     }
+    }
+   })
+  }
+ }
+</script>

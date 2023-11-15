@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<style>
+ .container {
+  min-height: 100vh;
+ }
+
+ .mb-3 {
+  width: 300px;
+ }
+</style>
+
+<div class="container d-flex align-items-center justify-content-center">
+ <div class="d-flex flex-column align-items-center">
+  <h4 class="mb-4">로그인</h4>
+  <form class="login" action="/board/login" method="post">
+   <div class="mb-3">
+    <label for="mb_email" class="form-label">이메일</label>
+    <input type="text" class="form-control" id="mb_email" name="mb_email" placeholder="이메일을 입력해주세요.">
+   </div>
+   <div class="mb-3">
+    <label for="mb_password" class="form-label">비밀번호</label>
+    <input type="password" class="form-control" id="mb_password" name="mb_password" placeholder="비밀번호를 입력해주세요.">
+   </div>
+   <button type="submit" class="btn btn-primary">로그인</button>
+  </form>
+ </div>
+</div>
+
+
+<script src="/js/bootstrap.min.js"></script>
